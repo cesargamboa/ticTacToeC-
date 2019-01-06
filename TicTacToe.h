@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 class TicTacToe {
 public:
 	TicTacToe();
@@ -10,4 +11,5 @@ public:
 	void movimientoCPU(char* tablero);
 private:
 	char tablero[10] = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' };
+	std::string dificultad = "facil";
 };

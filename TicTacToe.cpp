@@ -58,14 +58,13 @@ void TicTacToe::jugada(char* punteroAlTablero) {
 	do {
 		std::cout << "En que posicion desea hacer el movimiento: " << std::endl;
 		std::cin >> opcion;
-		punteroAlTablero[opcion] = 'X';
-		while (punteroAlTablero[opcion] != ' ') {
-			std::cout << "Ese movimiento no existe o, el campo esta ocupado" << std::endl;
-			std::cout << "En que posicion desea hacer el movimiento: " << std::endl;
-			std::cin >> opcion;
-			punteroAlTablero[opcion] = 'X';
+		if (punteroAlTablero[opcion] != ' ') {
+			std::cout << "Campo ocupado! ingrese de nuevo" << std::endl;
 		}
-		TicTacToe::movimientoCPU(punteroAlTablero);
+		else {
+			punteroAlTablero[opcion] = 'X';
+			TicTacToe::movimientoCPU(punteroAlTablero);
+		}
 		system("CLS");
 		TicTacToe::verTablero();
 	} while (!TicTacToe::ganaJugador() && !TicTacToe::ganaCPU());
@@ -141,13 +140,23 @@ bool TicTacToe::ganaCPU() {
 	return false;
 }
 void TicTacToe::movimientoCPU(char* punteroAlTablero) {
-	// Asegurarse que el campo este vacio antes de hacer la jugada
 	int numeroRandom;
-	srand(time(NULL));
-	numeroRandom = rand() % 9 + 1;
-	while (punteroAlTablero[numeroRandom] != ' ') {
+	if (dificultad == "dificil") {
+		//movimiento al centro
+		if (punteroAlTablero[5] != ' ') {
+			punteroAlTablero[numeroRandom] = 'O';
+		}
+		// revisar tablero
+		// mejor posicion: centro, esquinas
+	}
+	else {
 		srand(time(NULL));
 		numeroRandom = rand() % 9 + 1;
+		// Asegurarse que el campo este vacio antes de hacer la jugada
+		while (punteroAlTablero[numeroRandom] != ' ') {
+			srand(time(NULL));
+			numeroRandom = rand() % 9 + 1;
+		}
+		punteroAlTablero[numeroRandom] = 'O';
 	}
-	punteroAlTablero[numeroRandom] = 'O';
 }
