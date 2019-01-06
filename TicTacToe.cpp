@@ -1,5 +1,7 @@
 #include <iostream>
 #include "TicTacToe.h"
+#include <stdlib.h>
+#include <time.h>  
 
 
 TicTacToe::TicTacToe() {}
@@ -53,9 +55,99 @@ void TicTacToe::verTablero() {
 }
 void TicTacToe::jugada(char* punteroAlTablero) {
 	int opcion;
-	std::cout << "En que posicion desea hacer el movimiento: " << std::endl;
-	std::cin >> opcion;
-	punteroAlTablero[opcion] = 'X' ;
-	system("CLS");
-	TicTacToe::verTablero();
+	do {
+		std::cout << "En que posicion desea hacer el movimiento: " << std::endl;
+		std::cin >> opcion;
+		punteroAlTablero[opcion] = 'X';
+		while (punteroAlTablero[opcion] != ' ') {
+			std::cout << "Ese movimiento no existe o, el campo esta ocupado" << std::endl;
+			std::cout << "En que posicion desea hacer el movimiento: " << std::endl;
+			std::cin >> opcion;
+			punteroAlTablero[opcion] = 'X';
+		}
+		TicTacToe::movimientoCPU(punteroAlTablero);
+		system("CLS");
+		TicTacToe::verTablero();
+	} while (!TicTacToe::ganaJugador() && !TicTacToe::ganaCPU());
+}
+bool TicTacToe::ganaJugador() {
+	if ((tablero[1] == 'X') && (tablero[2] == 'X') && (tablero[3] == 'X')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[4] == 'X') && (tablero[5] == 'X') && (tablero[6] == 'X')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[7] == 'X') && (tablero[8] == 'X') && (tablero[9] == 'X')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[1] == 'X') && (tablero[4] == 'X') && (tablero[7] == 'X')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[2] == 'X') && (tablero[5] == 'X') && (tablero[8] == 'X')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[3] == 'X') && (tablero[6] == 'X') && (tablero[9] == 'X')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[1] == 'X') && (tablero[5] == 'X') && (tablero[9] == 'X')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	else if ((tablero[7] == 'X') && (tablero[5] == 'X') && (tablero[3] == 'X')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	return false;
+}
+bool TicTacToe::ganaCPU() {
+	if ((tablero[1] == 'O') && (tablero[2] == 'O') && (tablero[3] == 'O')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[4] == 'O') && (tablero[5] == 'O') && (tablero[6] == 'O')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[7] == 'O') && (tablero[8] == 'O') && (tablero[9] == 'O')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[1] == 'O') && (tablero[4] == 'O') && (tablero[7] == 'O')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[2] == 'O') && (tablero[5] == 'O') && (tablero[8] == 'O')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[3] == 'O') && (tablero[6] == 'O') && (tablero[9] == 'O')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	if ((tablero[1] == 'O') && (tablero[5] == 'O') && (tablero[9] == 'O')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	else if ((tablero[7] == 'O') && (tablero[5] == 'O') && (tablero[3] == 'O')) {
+		std::cout << "Hay ganador" << std::endl;
+		return true;
+	}
+	return false;
+}
+void TicTacToe::movimientoCPU(char* punteroAlTablero) {
+	// Asegurarse que el campo este vacio antes de hacer la jugada
+	int numeroRandom;
+	srand(time(NULL));
+	numeroRandom = rand() % 9 + 1;
+	while (punteroAlTablero[numeroRandom] != ' ') {
+		srand(time(NULL));
+		numeroRandom = rand() % 9 + 1;
+	}
+	punteroAlTablero[numeroRandom] = 'O';
 }
