@@ -142,11 +142,48 @@ bool TicTacToe::ganaCPU() {
 void TicTacToe::movimientoCPU(char* punteroAlTablero) {
 	int numeroRandom;
 	if (dificultad == "dificil") {
+		std::cout << "Getting here";
 		//movimiento al centro
-		if (punteroAlTablero[5] != ' ') {
-			punteroAlTablero[numeroRandom] = 'O';
-		}
+		/*if (punteroAlTablero[5] != ' ') {
+			punteroAlTablero[5] = 'O';
+		}*/
 		// revisar tablero
+		for (int i = 1; i < 10; i++) {
+			if (((punteroAlTablero[i + 1] && punteroAlTablero[i - 1]) == 'O')
+				||
+				((punteroAlTablero[i + 2] && punteroAlTablero[i - 2]) == 'O')
+				||
+				((punteroAlTablero[i + 1] && punteroAlTablero[i + 2]) == 'O')
+				||
+				((punteroAlTablero[i - 1] && punteroAlTablero[i - 2]) == 'O')
+				) {
+				std::cout << "Getting here case 1";
+				punteroAlTablero[i] = 'O';
+				}
+			if (((punteroAlTablero[i + 3] && punteroAlTablero[i - 6]) == 'O')
+				||
+				((punteroAlTablero[i + 6] && punteroAlTablero[i - 6]) == 'O')
+				||
+				((punteroAlTablero[i + 3] && punteroAlTablero[i + 6]) == 'O')
+				||
+				((punteroAlTablero[i - 3] && punteroAlTablero[i - 6]) == 'O')
+				) {
+				std::cout << "Getting here case 2";
+				punteroAlTablero[i] = 'O';
+			}
+			if (((punteroAlTablero[i + 4] && punteroAlTablero[i - 9]) == 'O')
+				||
+				((punteroAlTablero[i + 9] && punteroAlTablero[i - 9]) == 'O')
+				||
+				((punteroAlTablero[i + 4] && punteroAlTablero[i + 9]) == 'O')
+				||
+				((punteroAlTablero[i - 4] && punteroAlTablero[i - 9]) == 'O')
+				) {
+				std::cout << "Getting here case 3";
+				punteroAlTablero[i] = 'O';
+			}
+		}
+		// revisar si n y n+1 esta ocupado, luego si si, poner en n+2
 		// mejor posicion: centro, esquinas
 	}
 	else {

@@ -11,5 +11,5 @@ public:
 	void movimientoCPU(char* tablero);
 private:
 	char tablero[10] = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' };
-	std::string dificultad = "facil";
+	std::string dificultad = "dificil";
 };
