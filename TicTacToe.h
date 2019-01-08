@@ -9,6 +9,7 @@ public:
 	bool ganaJugador();
 	bool ganaCPU();
 	void movimientoCPU(char* tablero);
+	void ponerDificultad(std::string);
 private:
 	char tablero[10] = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' };
 	std::string dificultad = "dificil";
